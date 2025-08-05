@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import org.montra.crudmuliplatform.ui.screen.SparePartsCatalog
+import org.montra.crudmuliplatform.ui.screen.UpdateSpareParts
 
 class InterScreen: Screen {
     @Composable
@@ -28,6 +29,8 @@ class InterScreen: Screen {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
             buttonViewAll()
+            Spacer(modifier = Modifier.height(10.dp))
+            buttonUpdate()
             Spacer(modifier = Modifier.height(10.dp))
             buttonLogOut()
         }
@@ -44,6 +47,19 @@ fun buttonViewAll(){
         contentPadding = PaddingValues(10.dp)
     ){
         Text(fontSize = 20.sp,text = "Ver Catalogo")
+    }
+}
+
+@Composable
+fun buttonUpdate(){
+    val navigator = LocalNavigator.current
+    Button(
+        onClick = { navigator?.push(UpdateSpareParts())},
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 50.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8B0000), contentColor = Color.White),
+        contentPadding = PaddingValues(10.dp)
+    ){
+        Text(fontSize = 20.sp,text = "Actualizar")
     }
 }
 

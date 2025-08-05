@@ -10,6 +10,7 @@ import org.montra.crudmuliplatform.data.network.KtorClientProvider
 import org.montra.crudmuliplatform.data.network.SparePartService
 import org.montra.crudmuliplatform.data.repository.SparePartsRepository
 import org.montra.crudmuliplatform.ui.viewmodel.SparePartsCatalogViewModel
+import org.montra.crudmuliplatform.ui.viewmodel.UpdateSparePartsViewModel
 
 
 val dataModule = module {
@@ -20,6 +21,7 @@ val dataModule = module {
 
 val viewModelsModule = module {
     viewModelOf(::SparePartsCatalogViewModel)
+    viewModelOf(::UpdateSparePartsViewModel)
 }
 
 fun initKoin(config: KoinAppDeclaration? = null) {
