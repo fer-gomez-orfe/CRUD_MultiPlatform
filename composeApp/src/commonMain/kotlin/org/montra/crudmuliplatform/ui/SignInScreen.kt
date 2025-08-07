@@ -7,19 +7,16 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,7 +36,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 class SignInScreen: Screen {
     @Composable
     override fun Content() {
-        val navigator = LocalNavigator.current
+        //val navigator = LocalNavigator.current
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -70,27 +67,19 @@ class SignInScreen: Screen {
          },
          enabled = true,
          readOnly = false,
-         textStyle = TextStyle(color = Color(0xFF8B0000)),
          label = { Text(text = "Nombre") },
          placeholder = { Text(text = "Nombre completo") },
          leadingIcon = {
-             Icon(imageVector = Icons.Default.Email, contentDescription = "")
-         },
-         trailingIcon = {
-             Icon(imageVector = Icons.Default.CheckCircle, contentDescription = "")
+             Icon(imageVector = Icons.Default.Face, contentDescription = "")
          },
          isError = true,
-         //visualTransformation = PasswordVisualTransformation(),
          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
          keyboardActions = KeyboardActions(onSearch = {}),
          singleLine = true,
          maxLines = 1,
          minLines = 1,
          interactionSource = MutableInteractionSource(),
-         shape = RoundedCornerShape(10.dp),
-         colors = TextFieldDefaults.textFieldColors(
-             disabledTextColor = Color.DarkGray,
-             cursorColor = Color.Yellow )
+         shape = RoundedCornerShape(10.dp)
      )
  }
 
@@ -105,17 +94,12 @@ fun emailTextField(){
         },
         enabled = true,
         readOnly = false,
-        textStyle = TextStyle(color = Color(0xFF8B0000)),
         label = { Text(text = "Correo") },
         placeholder = { Text(text = "ejemplo@montrasolutions.com") },
         leadingIcon = {
             Icon(imageVector = Icons.Default.Email, contentDescription = "")
         },
-        trailingIcon = {
-            Icon(imageVector = Icons.Default.CheckCircle, contentDescription = "")
-        },
         isError = true,
-        //visualTransformation = PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         keyboardActions = KeyboardActions(onSearch = {}),
         singleLine = true,
@@ -123,9 +107,6 @@ fun emailTextField(){
         minLines = 1,
         interactionSource = MutableInteractionSource(),
         shape = RoundedCornerShape(10.dp),
-        colors = TextFieldDefaults.textFieldColors(
-            disabledTextColor = Color.DarkGray,
-            cursorColor = Color.Yellow )
     )
 }
 
@@ -145,21 +126,15 @@ fun passwordTextField(){
         leadingIcon = {
             Icon(imageVector = Icons.Default.Email, contentDescription = "")
         },
-        trailingIcon = {
-            Icon(imageVector = Icons.Default.CheckCircle, contentDescription = "")
-        },
         isError = true,
         visualTransformation = PasswordVisualTransformation(),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         keyboardActions = KeyboardActions(onSearch = {}),
         singleLine = true,
         maxLines = 1,
         minLines = 1,
         interactionSource = MutableInteractionSource(),
         shape = RoundedCornerShape(10.dp),
-        colors = TextFieldDefaults.textFieldColors(
-            disabledTextColor = Color.DarkGray,
-            cursorColor = Color.Yellow )
     )
 }
 
@@ -169,7 +144,6 @@ fun buttonReg(){
     Button(
         onClick = { navigator?.pop()},
         modifier = Modifier.padding(horizontal = 50.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8B0000), contentColor = Color.White)
     ){
         Text(fontSize = 20.sp,text = "Registrar usuario")
     }
@@ -181,7 +155,6 @@ fun buttonCancel(){
     Button(
         onClick = { navigator?.pop()},
         modifier = Modifier.padding(horizontal = 50.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF696969), contentColor = Color.White)
     ){
         Text(fontSize = 20.sp,text = "Cancelar")
     }

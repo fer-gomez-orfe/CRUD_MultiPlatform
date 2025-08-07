@@ -24,4 +24,14 @@ data class SparePartModel (
             it.contains(query, ignoreCase = true)
         }
     }
+
+    fun checkIfExist(query: String) : Boolean {
+        val matchingSerials = listOf(
+            serial_number,
+            part_number
+        )
+        return  matchingSerials.any {
+            it.contains(query, ignoreCase = true)
+        }
+    }
 }

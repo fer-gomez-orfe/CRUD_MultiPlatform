@@ -13,22 +13,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-
-import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.montra.crudmuliplatform.data.model.SparePartModel
@@ -38,10 +35,11 @@ import org.montra.crudmuliplatform.ui.viewmodel.SparePartsCatalogViewModel
 class SparePartsCatalog: Screen {
     @Composable
     override fun Content() {
-        val navigator = LocalNavigator.current
-
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally){
-
+        //val navigator = LocalNavigator.current
+        Column(
+            Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
             SparePartsScreen()
         }
     }
@@ -53,7 +51,6 @@ class SparePartsCatalog: Screen {
 fun SparePartsScreen(
     viewModel: SparePartsCatalogViewModel = koinViewModel<SparePartsCatalogViewModel>()
 ){
-    
     val searchText by viewModel.searchText.collectAsState()
     val sparePartList by viewModel.spareParts.collectAsState()
     val isSearching by viewModel.isSearching.collectAsState()
@@ -91,12 +88,13 @@ fun SparePartsScreen(
 }
 
 @Composable
-fun itemCard(sparePart: SparePartModel){
+private fun itemCard(sparePart: SparePartModel){
     Card(
-        elevation = 6.dp,
-        modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(vertical = 10.dp, horizontal = 20.dp),
+        modifier = Modifier
+            .wrapContentHeight()
+            .fillMaxWidth()
+            .padding(vertical = 10.dp, horizontal = 20.dp),
         border = BorderStroke(1.dp, Color.Black),
-        backgroundColor = Color(0xFFFFFFF0)
 
     ){
         Column(

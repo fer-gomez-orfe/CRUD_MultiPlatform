@@ -4,12 +4,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.montra.crudmuliplatform.data.repository.SparePartsRepository
 import org.montra.crudmuliplatform.data.model.SparePartModel
-
+import org.montra.crudmuliplatform.data.repository.SparePartsRepository
 
 
 @OptIn(FlowPreview::class)
@@ -31,7 +36,7 @@ class SparePartsCatalogViewModel(
             if(text.isBlank()) {
                 sparePart
             } else {
-                delay(2000L)
+                //delay(2000L)
                 sparePart.filter {
                     it.doesMatchSearchQuery(text)
 
@@ -49,7 +54,7 @@ class SparePartsCatalogViewModel(
         loadSpareParts()
     }
 
-    fun loadSpareParts() {
+    private fun loadSpareParts() {
         viewModelScope.launch {
             try {
                 val parts = repository.fetchSpareParts()

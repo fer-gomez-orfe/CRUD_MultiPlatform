@@ -7,14 +7,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
@@ -29,9 +27,9 @@ class InterScreen: Screen {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
             buttonViewAll()
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             buttonUpdate()
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             buttonLogOut()
         }
     }
@@ -42,9 +40,8 @@ fun buttonViewAll(){
     val navigator = LocalNavigator.current
     Button(
         onClick = { navigator?.push(SparePartsCatalog())},
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 50.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8B0000), contentColor = Color.White),
-        contentPadding = PaddingValues(10.dp)
+        modifier = Modifier.fillMaxWidth(0.5f).widthIn(max = 300.dp),
+        contentPadding = PaddingValues(10.dp),
     ){
         Text(fontSize = 20.sp,text = "Ver Catalogo")
     }
@@ -55,9 +52,8 @@ fun buttonUpdate(){
     val navigator = LocalNavigator.current
     Button(
         onClick = { navigator?.push(UpdateSpareParts())},
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 50.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8B0000), contentColor = Color.White),
-        contentPadding = PaddingValues(10.dp)
+        modifier = Modifier.fillMaxWidth(0.5f).widthIn(max = 300.dp),
+        contentPadding = PaddingValues(10.dp),
     ){
         Text(fontSize = 20.sp,text = "Actualizar")
     }
@@ -68,9 +64,8 @@ fun buttonLogOut(){
     val navigator = LocalNavigator.current
     Button(
         onClick = { navigator?.pop()},
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 50.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF696969), contentColor = Color.White),
-        contentPadding = PaddingValues(10.dp)
+        modifier = Modifier.fillMaxWidth(0.5f).widthIn(max = 300.dp),
+        contentPadding = PaddingValues(10.dp),
     ){
         Text(fontSize = 20.sp,text = "Salir")
     }
