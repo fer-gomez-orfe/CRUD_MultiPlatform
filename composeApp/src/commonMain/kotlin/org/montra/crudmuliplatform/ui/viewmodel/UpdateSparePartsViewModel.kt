@@ -7,9 +7,11 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.montra.crudmuliplatform.data.model.SparePartModel
 import org.montra.crudmuliplatform.data.repository.SparePartsRepository
+import java.util.Collections.emptyList
 
 @OptIn(FlowPreview::class)
 class UpdateSparePartsViewModel (
@@ -27,9 +29,57 @@ class UpdateSparePartsViewModel (
     private val _filteredSpareParts = MutableStateFlow<List<SparePartModel>>(emptyList())
     val filteredSpareParts = _filteredSpareParts.asStateFlow()
 
+    private val _validation = MutableStateFlow(false)
+    val validation = _validation.asStateFlow()
+
+    private val _nombreProducto = MutableStateFlow("")
+    val nombreProducto = _nombreProducto.asStateFlow()
+
+    private val _productName = MutableStateFlow("")
+    val productName = _productName.asStateFlow()
+
+    private val _description = MutableStateFlow("")
+    val description = _description.asStateFlow()
+
+    private val _partNumber = MutableStateFlow("")
+    val partNumber = _partNumber.asStateFlow()
+
+    private val _quantity = MutableStateFlow("")
+    val quantity = _quantity.asStateFlow()
+
+    private val _notes = MutableStateFlow("")
+    val notes = _notes.asStateFlow()
+
+
     fun onSearchTextChange(text : String) {
         _searchText.value = text
     }
+
+    fun onNombreProductoTextChange(text : String) {
+        _nombreProducto.value = text
+    }
+
+    fun onProductNameTextChange(text : String) {
+        _productName.value = text
+    }
+
+    fun onDescriptionTextChange(text : String) {
+        _description.value = text
+    }
+
+    fun onPartNumberTextChange(text : String) {
+        _partNumber.value = text
+    }
+
+    fun onQuantityTextChange(text: String) {
+        _quantity.value = text
+    }
+
+    fun onNotesTextChange(text : String) {
+        _notes.value = text
+    }
+
+
 
     init {
         loadSpareParts()
@@ -44,12 +94,15 @@ class UpdateSparePartsViewModel (
             val parts = _spareParts.value
 
             _filteredSpareParts.value = if(text.isBlank()){
-                parts
+                emptyList<SparePartModel>()
             }else{
                 parts.filter {
                     it.checkIfExist(text)
                 }
             }
+
+            _validation.value = if (_filteredSpareParts.value.isEmpty()) true else false
+
             _isSearching.value = false
         }
     }

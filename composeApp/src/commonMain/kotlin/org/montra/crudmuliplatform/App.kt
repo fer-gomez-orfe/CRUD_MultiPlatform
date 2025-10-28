@@ -8,7 +8,6 @@ import org.montra.crudmuliplatform.theme.AppTheme
 import org.montra.crudmuliplatform.ui.LogInScreen
 
 @Composable
-@Preview
 fun App(
     darkTheme: Boolean,
     dynamicColor: Boolean,

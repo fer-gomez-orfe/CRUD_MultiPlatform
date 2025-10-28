@@ -1,6 +1,8 @@
 package org.montra.crudmuliplatform.ui.screen
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +16,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -25,10 +28,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.montra.crudmuliplatform.data.model.SparePartModel
+import org.montra.crudmuliplatform.theme.color_palettes.RedColorBase
 import org.montra.crudmuliplatform.ui.viewmodel.SparePartsCatalogViewModel
 
 
@@ -37,7 +42,9 @@ class SparePartsCatalog: Screen {
     override fun Content() {
         //val navigator = LocalNavigator.current
         Column(
-            Modifier.fillMaxWidth(),
+            Modifier.fillMaxWidth().background(
+                if (isSystemInDarkTheme()) Color.Black else Color.White
+            ),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             SparePartsScreen()
@@ -59,6 +66,15 @@ fun SparePartsScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
+        Text(
+            text = "Escriba para buscar",
+            modifier = Modifier.fillMaxWidth(),
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+        )
+
+        Spacer(modifier = Modifier.height(4.dp))
+
         TextField(
             value = searchText,
             onValueChange = viewModel::onSearchTextChange,
@@ -94,7 +110,11 @@ private fun itemCard(sparePart: SparePartModel){
             .wrapContentHeight()
             .fillMaxWidth()
             .padding(vertical = 10.dp, horizontal = 20.dp),
-        border = BorderStroke(1.dp, Color.Black),
+        colors = CardDefaults.cardColors(
+            containerColor = RedColorBase.primaryContainerLight,
+            contentColor = RedColorBase.onPrimaryContainerLight,
+        ),
+        border = BorderStroke(1.dp, RedColorBase.onPrimaryContainerLight),
 
     ){
         Column(
